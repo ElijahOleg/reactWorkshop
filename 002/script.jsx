@@ -1,16 +1,15 @@
 
 var Hello = React.createClass({
   render: function(){
-    var name = "Gerald";
     return(
       <div>
-          Hello {name}
+          {this.props.greet} {this.props.name}
       </div>
     )
   }
 })
 
 React.render(
-  <Hello />,
+  <Hello greet="Wutup" name="Bobby Shmurda"/>,
   document.getElementById("root")
 );
