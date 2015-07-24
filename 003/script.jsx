@@ -5,19 +5,27 @@ var Hello = React.createClass({
   },
   greet: function(){
     var ref = this.refs;
-    console.log(ref);
     this.setState(
-      {greeting: "hello", name:ref.name2greet.value}
+      {greeting: "hello", name:ref.name2greet.value},
+      function(){
+        this.refs.name2greet.value = '';
+      }
     );
   },
   componentDidMount: function(){
-    this.greet()
+    this.greet();
   },
+  // componentWillMount: function(){
+  //   this.greet();
+  // },
+  // componentWillUnmount: function(){
+  //   this.greet();
+  // },
     render: function(){
     return(
       <div>
-        <input placeholder="name" ref="name2greet"/>
-        <button onClick={this.greet}>Greet</button>
+        <input class="form" placeholder="name" ref="name2greet"/>
+        <button id="btn" onClick={this.greet}>Greet</button>
         <br></br>
         {this.state.greeting} {this.state.name}
       </div>
