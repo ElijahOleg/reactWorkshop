@@ -9,7 +9,18 @@ var Hello = React.createClass({
   }
 })
 
+var App = React.createClass({
+  render: function(){
+    return(
+      <div>
+      <Hello greet="Wutup" name="Bobby Shmurda"/>
+      <h1> React example</h1>
+      </div>
+    )
+  }
+})
+
 React.render(
-  <Hello greet="Wutup" name="Bobby Shmurda"/>,
+  <App />,
   document.getElementById("root")
 );
