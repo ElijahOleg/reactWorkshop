@@ -1,12 +1,15 @@
 
 var Hello = React.createClass({
   getInitialState: function(){
-    return { greeting: 'Welcome', name: "State"};
+    return { users: ["Soren","Todd","Son","James"]};
   },
   greet: function(){
     var ref = this.refs;
-    this.setState(
-      {greeting: "hello", name:ref.name2greet.value},
+    var curretnUsers = this.state.users;
+    curretnUsers.push(ref.name2greet.value);
+    this.setState({
+      users:  this.state.users.concat(this.refs.name2greet.value)
+      },
       function(){
         this.refs.name2greet.value = '';
       }
@@ -21,13 +24,13 @@ var Hello = React.createClass({
   // componentWillUnmount: function(){
   //   this.greet();
   // },
-    render: function(){
+  render: function(){
     return(
       <div>
         <input class="form" placeholder="name" ref="name2greet"/>
         <button id="btn" onClick={this.greet}>Greet</button>
         <br></br>
-        {this.state.greeting} {this.state.name}
+        {this.state.greeting} {this.state.users}
       </div>
     )
   }
