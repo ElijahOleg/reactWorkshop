@@ -13,13 +13,12 @@ var FormComponent = React.createClass({
   handleSubmit: function(event){
     event.preventDefault();
     this.props.greet({ name: this.refs.name2greet.value, email: this.refs.email.value});
-      this.refs.name2greet.value = "";
-      this.refs.email.value = "";
+      this.refs.userForm.reset();
 
   },
   render: function(){
     return(
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} ref="userForm">
         <input placeholder="name" ref="name2greet"/>
         <input type="email" placeholder="email" ref="email"/>
         <button type="submit">Greet</button>
@@ -50,6 +49,9 @@ var App = React.createClass({
   getInitialState: function() {
     return {users: []};
   },
+  handleDelete: function(userName){
+    
+  },
     // this.refs.name2greet
   greet: function(user) {
     this.setState({
@@ -59,7 +61,7 @@ var App = React.createClass({
   render: function() {
     return (
       <div>
-        <FormComponent greet={this.greet} />
+        <FormComponent delete={this.handleDelete} greet={this.greet} />
         <hr />
         <Greetings users={this.state.users} />
       </div>
