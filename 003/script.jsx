@@ -1,9 +1,25 @@
 
 var Hello = React.createClass({
-  render: function(){
+  getInitialState: function(){
+    return { greeting: 'Welcome', name: "State"};
+  },
+  greet: function(){
+    var ref = this.refs;
+    console.log(ref);
+    this.setState(
+      {greeting: "hello", name:ref.name2greet.value}
+    );
+  },
+  componentDidMount: function(){
+    this.greet()
+  },
+    render: function(){
     return(
       <div>
-          {this.props.greet} {this.props.name}
+        <input placeholder="name" ref="name2greet"/>
+        <button onClick={this.greet}>Greet</button>
+        <br></br>
+        {this.state.greeting} {this.state.name}
       </div>
     )
   }
@@ -11,19 +27,9 @@ var Hello = React.createClass({
 
 var App = React.createClass({
   render: function(){
-    var collection = {
-      gerald: 'hi',
-      ryan: 'hello',
-      trey: "yo"
-    }
-    var greets = [];
-    for(var name in collection){
-      greets.push(<Hello greet={name} name={collection[name]}/>)
-    }
     return(
       <div>
-      <h1> React example</h1>
-      {greets}
+        <Hello />
       </div>
     )
   }
