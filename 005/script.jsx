@@ -1,6 +1,10 @@
 var OneUserGreeting = React.createClass({
   render: function(){
-    return(<li>Hello {this.props.name}</li>);
+    return(
+      <li>
+        <a href={"mailto:" + this.props.user.email}>Hello {this.props.user.name}</a>
+      </li>
+    );
   }
 })
 
@@ -8,12 +12,16 @@ var OneUserGreeting = React.createClass({
 var FormComponent = React.createClass({
   handleSubmit: function(event){
     event.preventDefault();
-    this.props.greet(this.refs.name2greet);
+    this.props.greet({ name: this.refs.name2greet.value, email: this.refs.email.value});
+      this.refs.name2greet.value = "";
+      this.refs.email.value = "";
+
   },
   render: function(){
     return(
       <form onSubmit={this.handleSubmit}>
         <input placeholder="name" ref="name2greet"/>
+        <input type="email" placeholder="email" ref="email"/>
         <button type="submit">Greet</button>
       </form>
     );
@@ -23,8 +31,8 @@ var FormComponent = React.createClass({
 
 var Greetings = React.createClass({
   render: function() {
-    var userLis = this.props.users.map(function(name, i) {
-      return <OneUserGreeting name={name} key={i} />
+    var userLis = this.props.users.map(function(user, i) {
+      return <OneUserGreeting user={user} key={i} />
     })
     return (
     <div>
@@ -40,16 +48,13 @@ var Greetings = React.createClass({
 
 var App = React.createClass({
   getInitialState: function() {
-    return {users: ["Son", "Elijah"]};
+    return {users: []};
   },
     // this.refs.name2greet
-  greet: function(nameInput) {
+  greet: function(user) {
     this.setState({
-      users: this.state.users.concat(nameInput.value)
-    }, function() {
-        nameInput.value = '';
-      }
-    );
+      users: this.state.users.concat(user)
+    });
   },
   render: function() {
     return (
