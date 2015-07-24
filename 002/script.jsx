@@ -11,10 +11,19 @@ var Hello = React.createClass({
 
 var App = React.createClass({
   render: function(){
+    var collection = {
+      gerald: 'hi',
+      ryan: 'hello',
+      trey: "yo"
+    }
+    var greets = [];
+    for(var name in collection){
+      greets.push(<Hello greet={name} name={collection[name]}/>)
+    }
     return(
       <div>
-      <Hello greet="Wutup" name="Bobby Shmurda"/>
       <h1> React example</h1>
+      {greets}
       </div>
     )
   }
